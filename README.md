@@ -2,6 +2,10 @@
 
 ### All the Certificate image is hyperlink to the verified link of the certificate. Click on the image to the link.
 
+## Problem Solving (Basic)
+[![pythonBasic](./CertificateJPG/problemBasic.png)](https://www.hackerrank.com/certificates/c7c9189c1c2d)
+To get HackerRank certification you need to solve number of problems in 90 min. But there is no way to see the code we worte after the submission so I can't show the code.
+
 ## Python (Basic)
 [![pythonBasic](./CertificateJPG/pythonBasic.png)](https://www.hackerrank.com/certificates/4650fb5f6134)
 To get HackerRank certification you need to solve number of problems in 90 min. But there is no way to see the code we worte after the submission so I can't show the code.
