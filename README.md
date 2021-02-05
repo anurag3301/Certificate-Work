@@ -2,6 +2,10 @@
 
 ### All the Certificate image is hyperlink to the verified link of the certificate. Click on the image to the link.
 
+## Deep Learning with PyTorch: Zero to GANs
+[![deepLearning](./CertificateJPG/deepLearning.jpg)](https://jovian.ai/certificate/MFQTGOJXGQ)
+You can check the Jupyter Notebook of all the assignments and Project in [this folder](./Deep_Learning) or visit my [Jovian.ai profile](https://jovian.ai/anurag3301)
+
 ## Data Analysis with Python: Zero to Pandas
 [![dataAnalysis](./CertificateJPG/dataAnalysis.jpg)](https://jovian.ai/certificate/MFQTGMRZGI)
 You can check the Jupyter Notebook of all the assignments and Project in [this folder](./Data_Analysis) or visit my [Jovian.ai profile](https://jovian.ai/anurag3301)
