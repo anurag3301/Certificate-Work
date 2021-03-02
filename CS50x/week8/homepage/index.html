@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>Learn Maths</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <script>
+      window.onload = function(){
+        document.getElementById("search_button").onclick = function(){
+          let search = document.getElementById("text_box").value;
+          window.open('https://www.google.com/search?q=' + search, '_blank');
+        }
+
+      }
+      function search_private_tutor(){
+          window.open('https://www.google.com/search?q=private math tutors near me', '_blank');
+        }
+    </script>
+
+  </head>
+  <body>
+    <div id="container">
+      <div id="header">
+        <div id="brand">
+          <h1><a href="#">Maths the Fun Way</a></h1>
+        </div>
+        <div id="searchBox">
+          <input type="text" class="text" id="text_box"/>
+          <button type="submit" class="submit" id ="search_button"> Search a topic </button>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div id="menu">
+        <ul>
+          <li><a href="#" class="active">HOME</a></li>
+          <li><a href="https://www.khanacademy.org/math">ONLINE TUTORIAL</a></li>
+          <li><a href="javascript:search_private_tutor()">PRIVATE TUTOR</a></li>
+          <li><a href="login.html">LOG IN</a></li>
+          <li><a href="signup.html">SIGN UP</a></li>
+          <li style="border-right: none"><a href="contactus.html">CONTACT US</a></li>
+        </ul>
+      </div>
+      <div id="intro">
+        <h3>Do you need help with Maths?</h3>
+        <p>
+          Our website uses an interactive methodology of teaching Maths using
+          the latest web technologies. Your learning experience with us is
+          guaranteed to be intuitive and fun. You will have fun while learning.
+          This is the secret of our outstanding results. Check reviews from our
+          students.
+        </p>
+      </div>
+
+      <div id="leftsidebar" class="sidebar">
+        <h3>Go To:</h3>
+        <ul id="standered">
+          <li><a target="_blank" href="https://www.khanacademy.org/math/cc-1st-grade-math">Class 1 free Lessons. </a></li>
+          <li><a target="_blank" href="https://www.khanacademy.org/math/cc-2nd-grade-math">Class 2 free Lessons. </a></li>
+          <li><a target="_blank" href="https://www.khanacademy.org/math/cc-third-grade-math">Class 3 free Lessons. </a></li>
+          <li><a target="_blank" href="https://www.khanacademy.org/math/cc-fourth-grade-math">Class 4 free Lessons. </a></li>
+          <li><a target="_blank" href="https://www.khanacademy.org/math/cc-fifth-grade-math">Class 5 free Lessons. </a></li>
+          <li><a target="_blank" href="https://www.khanacademy.org/math/in-in-class-6th-math-cbse">Class 6 free Lessons. </a></li>
+          <li><a target="_blank" href="https://www.khanacademy.org/math/in-class-7-math-foundation">Class 7 free Lessons. </a></li>
+          <li><a target="_blank" href="https://www.khanacademy.org/math/cc-eighth-grade-math">Class 8 free Lessons. </a></li>
+          <li><a target="_blank" href="https://www.khanacademy.org/math/in-class-9-math-foundation">Class 9 free Lessons. </a></li>
+          <li><a target="_blank" href="https://www.khanacademy.org/math/in-class-10-math-foundation">Class 10 free Lessons. </a></li>
+          <li><a target="_blank" href="https://www.khanacademy.org/math/in-in-grade-11-ncert">Class 11 free Lessons. </a></li>
+          <li><a target="_blank" href="https://www.khanacademy.org/math/in-in-grade-12-ncert">Class 12 free Lessons. </a></li>
+        </ul>
+      </div>
+      <div id="rightsidebar" class="sidebar">
+        <h3>Why Us?</h3>
+        <ul>
+          <li><p>Our teachers are available any time.</p></li>
+          <li><p>Available on laptop, Tablets and Phones.</p></li>
+          <li><p>30 day Money Back Guarantee.</p></li>
+          <li><p>Interactive games for an enjoyable learning experience.</p></li>
+          <li><p>Learn at your own pace.</p></li>
+          <li><p>Complete curriculum.</p></li>
+        </ul>
+      </div>
+      <div class="clear"></div>
+      <footer class="footer">
+        <div>
+          <p>Company Name. Copyright &copy; 2003-2021</p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
