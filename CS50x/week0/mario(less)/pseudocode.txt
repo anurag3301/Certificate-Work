@@ -1,0 +1,6 @@
+make a infinite loop
+    take input form user
+    if the input is between 0 and 9
+        then use a for loop to print #
+        return 0
+    else continue
