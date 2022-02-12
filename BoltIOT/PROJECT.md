@@ -38,7 +38,8 @@ So in this project, we are going show live Instagram Account followers and follo
 
 
 ## Python Code
-```import requests
+```py
+import requests
 import json
 import time
 from boltiot import Bolt
@@ -72,7 +73,8 @@ while True:
 
 ## Arduino Code
 
-```#include <Wire.h>
+```cpp
+#include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 
 LiquidCrystal_I2C lcd(0x3F, 16, 2);
