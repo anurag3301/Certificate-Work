@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block main %}
+    <!-- https://memegen.link/ -->
+    <main class="container py-5 text-center">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>TOTAL</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for row in rows %}
+            <tr>
+                <td>{{ row['stock'] }}</td>
+                <td>{{ row['name']}}</td>
+                <td>{{ row['share']}}</td>
+                <td>{{ row['price']}}</td>
+                <td>{{ row['total']}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan=3></td>
+                <th>Cash</th>
+                <td>{{ remain }}</td>
+            </tr>
+            <tr>
+                <td colspan=3></td>
+                <th>TOTAL</th>
+                <td>{{ total }}</td>
+            </tr>
+            </tfoot>
+        </table>
+    </main>
+{% endblock %}

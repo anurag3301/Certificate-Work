@@ -6,7 +6,7 @@ from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from helpers import apology, login_required, lookup, usd
+from helpers import apology, login_required, lookup, usd, conv
 
 # Configure application
 app = Flask(__name__)
@@ -35,15 +35,49 @@ def after_request(response):
 @app.route("/")
 @login_required
 def index():
-    """Show portfolio of stocks"""
-    return apology("TODO")
+    userid = session['user_id']
+    rows = db.execute(f"select * from trans where user_id={userid}")
+    remain = db.execute(f"select cash from users where id={userid}")[0]['cash']
+    total = sum([row['total'] for row in rows])
+    rows = conv(rows)
+    return render_template('index.html', rows=rows, remain=usd(remain), total=usd(total+remain))
 
 
 @app.route("/buy", methods=["GET", "POST"])
 @login_required
 def buy():
     """Buy shares of stock"""
-    return apology("TODO")
+    if request.method == "POST":
+        userid = session['user_id']
+        symbol = request.form.get("symbol")
+        if not request.form.get("shares").isdecimal():
+            return apology("Invalid shares")
+
+        shares = float(request.form.get("shares"))
+        quote_data = lookup(symbol)
+        if quote_data == None:
+            return apology("Invalid symbol")
+        if shares < 0:
+            return apology("Enter valid shares")
+        cash = db.execute(f"select cash from users where id={userid}")
+        total_cost = quote_data['price'] * shares
+        remaining = cash[0]['cash'] - total_cost
+        if remaining < 0:
+            return apology("Not sufficient balance")
+
+        db.execute(
+            f"update users set cash={round(remaining, 2)} where id={userid}")
+        row = db.execute(f"select * from trans where user_id={userid} and stock='{quote_data['symbol']}'")
+        if len(row) > 0:
+            db.execute(
+                f"update trans set share={row[0]['share']+shares}, total={row[0]['total']+total_cost} where user_id={userid} and stock='{quote_data['symbol']}'")
+        else:
+            db.execute(
+                f"insert into trans(user_id, stock, name, share, price, total) values ({userid}, '{quote_data['symbol']}', '{quote_data['name']}', {shares}, '{quote_data['price']}', {total_cost})")
+
+        return redirect("/")
+    else:
+        return render_template("buy.html")
 
 
 @app.route("/history")
@@ -104,17 +138,67 @@ def logout():
 @login_required
 def quote():
     """Get stock quote."""
-    return apology("TODO")
+    if request.method == "POST":
+        symbol = request.form.get("symbol")
+        quote_data = lookup(symbol)
+        if quote_data == None:
+            return apology("Invalid symbol")
+        quote_data['price'] = f"{quote_data['price']:.2f}"
+        return render_template("quoted.html", quote=quote_data)
+    else:
+        return render_template("quote.html")
 
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
-    return apology("TODO")
+    if request.method == "POST":
+        username = request.form.get('username')
+        password = request.form.get('password')
+        confirmation = request.form.get('confirmation')
+        if username == "" or len(db.execute(f"select * from users where username = '{username}';")):
+            return apology("Enter valid username")
+        if password != confirmation or password == "":
+            return apology("Enter valid password")
+
+        password_hash = generate_password_hash(password)
+        db.execute(f"insert into users(username, hash) values ('{username}', '{password_hash}');")
+
+        return redirect("/")
+    else:
+        return render_template("register.html")
 
 
 @app.route("/sell", methods=["GET", "POST"])
 @login_required
 def sell():
     """Sell shares of stock"""
-    return apology("TODO")
+    userid = session['user_id']
+    if request.method == "POST":
+        symbol = request.form.get("symbol")
+        if not request.form.get("shares").isdecimal():
+            return apology("Invalid shares")
+
+        shares = float(request.form.get("shares"))
+        quote_data = lookup(symbol)
+        if quote_data == None:
+            return apology("Invalid symbol")
+        if shares < 0:
+            return apology("Enter valid shares")
+        existing = db.execute(f"select share from trans where user_id={userid} and stock='{symbol}';")[0]['share']
+        existing_total = db.execute(f"select total from trans where user_id={userid} and stock='{symbol}';")[0]['total']
+
+        if shares > existing:
+            return apology("You dont have enough shares")
+
+        total_cost = quote_data['price'] * shares
+
+        existing_cash = db.execute(f"select cash from users where id={userid}")[0]['cash']
+        db.execute(f"update users set cash={round(existing_cash+total_cost, 2)} where id={userid}")
+        db.execute(
+            f"update trans set share={existing-shares}, total={existing_total-total_cost} where user_id={userid} and stock='{symbol}'")
+        return redirect("/")
+    else:
+        stock = db.execute(f"select stock from trans where user_id={userid}")
+        return render_template("sell.html", stocks=stock)
+

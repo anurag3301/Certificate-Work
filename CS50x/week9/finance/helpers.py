@@ -57,7 +57,8 @@ def lookup(symbol):
 
     # Query API
     try:
-        response = requests.get(url, cookies={"session": str(uuid.uuid4())}, headers={"User-Agent": "python-requests", "Accept": "*/*"})
+        response = requests.get(url, cookies={"session": str(uuid.uuid4())}, headers={
+            "User-Agent": "python-requests", "Accept": "*/*"})
         response.raise_for_status()
 
         # CSV header: Date,Open,High,Low,Close,Adj Close,Volume
@@ -71,6 +72,14 @@ def lookup(symbol):
         }
     except (requests.RequestException, ValueError, KeyError, IndexError):
         return None
+
+
+def conv(dat):
+    print(dat)
+    for i in range(len(dat)):
+        for k, v in dat[i].items():
+            dat[i][k] = v if type(v) == str else f"{v:.2f}" if k == 'share' else usd(v)
+    return dat
 
 
 def usd(value):
