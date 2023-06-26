@@ -1,6 +1,9 @@
 # My Work For all The Certification I have Done
 
 ### All the Certificate image is hyperlink to the verified link of the certificate. Click on the image to the link.
+## Harvard University: CS50x
+[![cs50x](./CertificateJPG/CS50x.png)](https://cs50.harvard.edu/certificates/60073f41-32fa-4f77-ad11-de90523f5d5b)
+You can check the the work for all the 10 weeks of this program in [this folder](./CS50x)
 
 ## Deep Learning with PyTorch: Zero to GANs
 [![deepLearning](./CertificateJPG/deepLearning.jpg)](https://jovian.ai/certificate/MFQTGOJXGQ)
